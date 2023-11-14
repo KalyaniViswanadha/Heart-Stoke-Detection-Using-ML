@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Prediction</title>
+    <style>
+        /* Add your styles here if needed */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Stroke Prediction Form</h2>
+
+    <form action="{{url_for('predict')}}" method="post" id="strokeForm" >
+        <!-- Gender -->
+        <label for="gender">Gender:</label>
+        <select id="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <!-- Age -->
+        <label for="age">Age:</label>
+        <input type="number" id="age" placeholder="Enter age" required>
+
+        <!-- Hypertension -->
+        <label for="hypertension">Hypertension (0 or 1):</label>
+        <input type="text" id="hypertension" placeholder="Enter 0 or 1" pattern="\b[01]\b" required>
+
+        <!-- Heart Disease -->
+        <label for="heartDisease">Heart Disease (0 or 1):</label>
+        <input type="text" id="heartDisease" placeholder="Enter 0 or 1" pattern="\b[01]\b" required>
+
+        <!-- Ever Married -->
+        <label for="everMarried">Ever Married:</label>
+        <select id="everMarried" required>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+
+        <!-- Work Type -->
+        <label for="workType">Work Type:</label>
+        <select id="workType" required>
+            <option value="children">Children</option>
+            <option value="Govt_job">Govt Job</option>
+            <option value="Never_worked">Never Worked</option>
+            <option value="Private">Private</option>
+            <option value="Self-employed">Self-employed</option>
+        </select>
+
+        <!-- Residence Type -->
+        <label for="residenceType">Residence Type:</label>
+        <select id="residenceType" required>
+            <option value="Rural">Rural</option>
+            <option value="Urban">Urban</option>
+        </select>
+
+        <!-- Average Glucose Level -->
+        <label for="avgGlucoseLevel">Average Glucose Level:</label>
+        <input type="number" id="avgGlucoseLevel" placeholder="Enter average glucose level" required>
+
+        <!-- BMI -->
+        <label for="bmi">BMI:</label>
+        <input type="number" id="bmi" placeholder="Enter BMI" required>
+
+        <!-- Smoking Status -->
+        <label for="smokingStatus">Smoking Status:</label>
+        <select id="smokingStatus" required>
+            <option value="formerlySmoked">Formerly Smoked</option>
+            <option value="neverSmoked">Never Smoked</option>
+            <option value="smokes">Smokes</option>
+            <option value="unknown">Unknown</option>
+        </select>
+
+        <!-- Submit Button
+        <button type="button" onclick="predictStroke()">Predict Stroke</button> -->
+        <!-- Submit Button -->
+        <button type="button" onclick="predictStroke()">Predict Stroke</button>
+    </form>
+    
+    <table id="resultTable" style="display:none;">
+        <tr>
+            
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Hypertension</th>
+            <th>Heart Disease</th>
+            <th>Ever Married</th>
+            <th>Work Type</th>
+            <th>Residence Type</th>
+            <th>Avg Glucose Level</th>
+            <th>BMI</th>
+            <th>Smoking Status</th>
+        </tr>
+        <tr id="resultRow">
+            <!-- Result will be displayed here -->
+        </tr>
+    </table>
+    <h3 id="predictionResult" style="display:none;"></h3>
+
+    <script>
+        function predictStroke() {
+            // Fetch values from input fields
+            var gender = document.getElementById("gender").value;
+            var age = document.getElementById("age").value;
+            var hypertension = document.getElementById("hypertension").value;
+            var heartDisease = document.getElementById("heartDisease").value;
+            var everMarried = document.getElementById("everMarried").value;
+            var workType = document.getElementById("workType").value;
+            var residenceType = document.getElementById("residenceType").value;
+            var avgGlucoseLevel = document.getElementById("avgGlucoseLevel").value;
+            var bmi = document.getElementById("bmi").value;
+            var smokingStatus = document.getElementById("smokingStatus").value;
+    
+            // Perform stroke prediction logic (replace with your actual logic)
+            var strokePrediction = Math.random() > 0.5 ? 1 : 0;
+    
+            // Display result in the table
+            document.getElementById("resultTable").style.display = "block";
+            document.getElementById("resultRow").innerHTML = "<td>" + gender + "</td><td>" + age + "</td><td>" + hypertension + "</td><td>" + 
+                heartDisease + "</td><td>" + everMarried + "</td><td>" + workType + "</td><td>" + residenceType + "</td><td>" + avgGlucoseLevel + "</td><td>" +
+                     bmi + "</td><td>" + smokingStatus + "</td>" ;
+    
+            // Display prediction result
+            document.getElementById("predictionResult").style.display = "block";
+            document.getElementById("predictionResult").innerText = "Stroke Prediction: " + strokePrediction;
+        }
+    </script>
+
+</body>
+</html>
